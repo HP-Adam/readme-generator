@@ -1,4 +1,16 @@
-const generateToC = (installation, usage, collab, features, repo, deploy) => {};
+const generateToC = (installation, usage, collab, features) => {
+  let installPortion = installation ? `* [Installation](#installation)` : "";
+  let usagePortion = usage ? `* [Usage](#usage)` : "";
+  let collabPortion = collab ? `* [Credits](#credits)` : "";
+  let featuresPortion = features ? `* [Features](#features)` : "";
+
+  return `
+${installPortion}
+${usagePortion}
+${collabPortion}
+${featuresPortion}
+  `;
+};
 
 const generateInstall = (installation) => {
   if (!installation) {
@@ -6,9 +18,8 @@ const generateInstall = (installation) => {
   }
 
   return `
-    ## Installation
-    
-    ${installation}
+## Installation
+${installation}
     `;
 };
 
@@ -18,10 +29,9 @@ const generateUsage = (usage) => {
   }
 
   return `
-      ## Usage
-      
-      ${usage}
-      `;
+## Usage
+${usage}
+    `;
 };
 
 const generateCollab = (collab) => {
@@ -29,18 +39,16 @@ const generateCollab = (collab) => {
     return "";
   }
 
-  let list = collab.split(", ");
-  list.map((item) => {
+  let list = collab.split(", ").map((item) => {
     return `
-      *${item}
+* ${item}
     `;
   });
 
   return `
-        ## Credits
-        
-        ${list}
-        `;
+## Credits
+${list}
+    `;
 };
 
 const generateFeatures = (features) => {
@@ -48,18 +56,16 @@ const generateFeatures = (features) => {
     return "";
   }
 
-  let list = features.split(", ");
-  list.map((item) => {
+  let list = features.split(", ").map((item) => {
     return `
-      *${item}
+* ${item}
     `;
   });
 
   return `
-        ## Features
-        
-        ${list}
-        `;
+## Features
+${list}
+    `;
 };
 
 const generateRepo = (repo) => {
@@ -68,9 +74,8 @@ const generateRepo = (repo) => {
   }
 
   return `
-    ### GitHub Repository
-
-    ${repo}
+### GitHub Repository
+${repo}
   `;
 };
 
@@ -80,9 +85,8 @@ const generateDeploy = (deploy) => {
   }
 
   return `
-    ### Deployed Project Page
-
-    ${deploy}
+### Deployed Project Page
+${deploy}
   `;
 };
 
@@ -100,36 +104,31 @@ module.exports = (projectData) => {
   } = projectData;
 
   return `
-    # ${title}
+# ${title}
 
-    ## Description 
-    
-    ${description}
-    
-    
-    ## Table of Contents
+## Description 
+${description}
 
-    ${generateToC(installation, usage, collab, features, repo, deploy)}        
-    * [Installation](#installation)
-    * [Usage](#usage)
-    * [Credits](#credits)
-    
-    
-    ${generateInstall(installation)}
-    
-    ${generateUsage(usage)}
-          
-    ${generateCollab(collab)}
-    
-    ${generateFeatures(features)}
-      
-    ---
 
-    ${generateRepo(repo)}
-   
-    ${generateDeploy(deploy)}
+## Table of Contents
+${generateToC(installation, usage, collab, features)}        
+  
 
-    ---
+${generateInstall(installation)}
+
+${generateUsage(usage)}
+    
+${generateCollab(collab)}
+
+${generateFeatures(features)}
+
+---
+
+${generateRepo(repo)}
+
+${generateDeploy(deploy)}
+
+---
 
     `;
 };
