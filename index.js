@@ -14,6 +14,8 @@ const questions = [
   "If your project has a lot of features, list them here separated by commas. (Example: Feature One, Feature Two) (Leave blank to omit Features section.)",
   "Provide a link to the GitHub repo. (Leave blank if none.)",
   "Provide a link to the deployed page. (Leave blank if none.)",
+  "What is your github username? (Required)",
+  "What is your email? (Required)",
 ];
 
 // TODO: Create a function to initialize app
@@ -88,6 +90,32 @@ const init = () => {
       name: "deploy",
       message: questions[8],
     },
+    {
+      type: "input",
+      name: "githubUserName",
+      message: questions[9],
+      validate: (nameInput) => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter your GitHub Username!");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "email",
+      message: questions[10],
+      validate: (emailInput) => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter your email!");
+          return false;
+        }
+      },
+    },
   ]);
 };
 
@@ -99,6 +127,6 @@ init()
   .then((pageMD) => {
     return writeFile(pageMD);
   })
-  .then((writeFileResponse) => {
+  .then(() => {
     console.log("README file created in '/dist' directory");
   });

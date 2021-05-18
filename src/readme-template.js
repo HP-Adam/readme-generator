@@ -9,6 +9,7 @@ ${installPortion}
 ${usagePortion}
 ${collabPortion}
 ${featuresPortion}
+* [Questions](#questions?)
   `;
 };
 
@@ -101,6 +102,8 @@ module.exports = (projectData) => {
     features,
     repo,
     deploy,
+    githubUserName,
+    email,
   } = projectData;
 
   return `
@@ -130,5 +133,9 @@ ${generateDeploy(deploy)}
 
 ---
 
+## Questions?
+Find me at [${githubUserName}](https://github.com/${githubUserName})
+
+Contact me at <${email}>
     `;
 };
